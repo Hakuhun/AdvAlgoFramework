@@ -12,7 +12,9 @@ namespace HalalFramework
     {
         static void Main(string[] args)
         {
-            ImageSegmentationCluster isc = new ImageSegmentationCluster("cica.bmp",5);
+            //ImageSegmentationCluster isc = new ImageSegmentationCluster("slide_sample.bmp",3);
+
+            HillClimbingStohacticSmallestBundaryPolygon sphbhc = new HillClimbingStohacticSmallestBundaryPolygon("Points.txt");
         }
     }
 }

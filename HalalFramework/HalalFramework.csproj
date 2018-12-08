@@ -45,10 +45,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Problem\ImageSegmentation.cs" />
+    <Compile Include="Problem\SmallestBoundaryroblem.cs" />
     <Compile Include="Problem\TravellingSalesman.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Solver\GeneticAlgorithm.cs" />
     <Compile Include="Solver\ImageSegmentationCluster.cs" />
+    <Compile Include="Solver\SBPHillClimbing.cs" />
+    <Compile Include="Solver\SimulatedAnnealingSmallestBoundaryPolygon.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
