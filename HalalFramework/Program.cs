@@ -14,7 +14,9 @@ namespace HalalFramework
         {
             //ImageSegmentationCluster isc = new ImageSegmentationCluster("slide_sample.bmp",3);
 
-            HillClimbingStohacticSmallestBundaryPolygon sphbhc = new HillClimbingStohacticSmallestBundaryPolygon("Points.txt");
+            //HillClimbingStohacticSmallestBundaryPolygon sphbhc = new HillClimbingStohacticSmallestBundaryPolygon("Points.txt");
+
+            SimulatedAnnealingSmallestBoundaryPolygon simu = new SimulatedAnnealingSmallestBoundaryPolygon("Points.txt");
         }
     }
 }

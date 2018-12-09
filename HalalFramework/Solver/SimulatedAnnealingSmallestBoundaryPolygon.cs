@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HalalFramework.Problem;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,42 +9,68 @@ namespace HalalFramework.Solver
 {
     class SimulatedAnnealingSmallestBoundaryPolygon
     {
+        SmallestBoundaryPoligonProblem problem;
+        int actIteration = 0, maxIteration = 1000;
+        double T;
+        readonly double Kb = 1.380649 * Math.Pow(10, -23);
+
+        public SimulatedAnnealingSmallestBoundaryPolygon(string filename)
+        {
+            T = 10000;
+            problem = new SmallestBoundaryPoligonProblem(filename);
+            Calc();
+        }
 
         void Calc()
         {
-            //while (T > 0)//*** amig !stopcondition()
-            //{
-            //    //q <-rnd- {x E S | ds(x,p) = epszilon} , most az epszilon 2
-            //    foreach (Point p in solution)
-            //    {
-            //        solution2.Add(new Point(p.X + GenerateRandom(2), p.Y + GenerateRandom(2)));
-            //    }
+            //p <-rnd- S
+            problem.Solution = problem.GenerateRandomPoints(5);
+            //Popt <- p
+            var popt = problem.Solution;
+            //t <- 1
+            int t = 1;
 
-            //    float deltaE = Objective(solution2) - Objective(solution); // f(gpm(q)) - f(gpm(p))
+            List<Point> newSolution;
 
-            //    if (deltaE < 0)//***
-            //    {
-            //        solution = solution2; //p <- q
+            while (!StopCondition())
+            {
+                newSolution = problem.GenerateNewPoints();
+                var fitness_difference = problem.objective(newSolution) 
+                    - problem.objective(problem.Solution);
+                if (fitness_difference < 0 && problem.constraint(newSolution))
+                {
+                    problem.Solution = newSolution;
+                    if (problem.objective(problem.Solution) < problem.objective(popt))
+                    {
+                        popt = problem.Solution;
+                        problem.Solution = newSolution;
+                    }
+                }
+                else
+                {
+                    T = Tempearture(t);
+                    var P = Math.Pow(Math.E, -(fitness_difference/(Kb*T)));
+                    if (SmallestBoundaryPoligonProblem.RAND.NextDouble() < P && problem.constraint(newSolution)) 
+                    {
+                        problem.Solution = newSolution;
+                    }
+                }
+                actIteration++;
+                Console.WriteLine(T + Environment.NewLine);
+                problem.savePointsToFile("simulatedannealing.txt", actIteration);
+            }
 
-            //        if (Objective(solution2) < Objective(solution))//f(gpm(p))<f(gpm(popt))
-            //        {
-            //            solution = solution2; //popt <- p
-            //        }
-            //    }
-            //    else
-            //    {
-            //        T = Temperature(t); //T <- Temperature(t)
-            //        double P = 100 * Math.Pow(e, -(deltaE / Kb * T));//*** a szazzal szorzas csak az r.next miatt kell
+        }
 
-            //        if (r.Next(0, 101) < P)// ha RNDu(0,1)<P
-            //        {
-            //            solution = solution2; //p <- q
-            //        }
-            //    }
+        private double Tempearture(int t)
+        {
+            return T *= 1 - 0.003;
+        }
 
-            //    SaveToLogFile(logfilename);
-            //}
-
+        /*A T állandóan csökken*/
+        bool StopCondition()
+        {
+            return T<1;
         }
 
     }

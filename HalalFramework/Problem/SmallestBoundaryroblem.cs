@@ -11,7 +11,7 @@ namespace HalalFramework.Problem
     {
         List<Point> points = new List<Point>();
         List<Point> solution = new List<Point>();
-        private static Random rnd = new Random();
+        public static Random RAND = new Random();
 
         public List<Point> Points { get => points; set => points = value; }
         public List<Point> Solution { get => solution; set => solution = value; }
@@ -39,6 +39,10 @@ namespace HalalFramework.Problem
             if (File.Exists("hcsto.txt"))
             {
                 File.Delete("hcsto.txt");
+            }
+            if (File.Exists("simulatedannealing.txt"))
+            {
+                File.Delete("simulatedannealing.txt");
             }
         }
 
@@ -116,9 +120,14 @@ namespace HalalFramework.Problem
             return outerDistanceToBoundary(solution) <= 0;
         }
 
+        public double constraint2(List<Point> solution)
+        {
+            return outerDistanceToBoundary(solution);
+        }
+
         public double AddRandomDist(int dist)
         {
-            return rnd.Next(-dist, dist);
+            return RAND.Next(-dist, dist);
         }
 
         public List<Point> GenerateRandomPoints(int boundarypoints)

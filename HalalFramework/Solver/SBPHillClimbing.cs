@@ -13,7 +13,6 @@ namespace HalalFramework.Solver
 
         SmallestBoundaryPoligonProblem problem;
         int iteration = 0;
-        bool stopCondition = false;
 
         public HillClimbingStohacticSmallestBundaryPolygon(string filename)
         {
@@ -26,10 +25,10 @@ namespace HalalFramework.Solver
             //p <- rnd - S 
             problem.Solution = problem.GenerateRandomPoints(5);
 
-            var newSolution = new List<Point>();
+            List<Point> newSolution;
             int i = 0;
 
-            while (!stopCondition)//***
+            while (!StopCondition())//***
             {
                 newSolution = problem.GenerateNewPoints();
 
@@ -46,12 +45,18 @@ namespace HalalFramework.Solver
 
                 problem.savePointsToFile("hcsto.txt", i);
 
-                if (iteration > 500)
-                {
-                    stopCondition = true;
-                }
+
                 i++;
             }
         }   
+
+        bool StopCondition()
+        {
+            if (iteration > 500)
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }
