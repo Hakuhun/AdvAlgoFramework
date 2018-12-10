@@ -44,6 +44,10 @@ namespace HalalFramework.Problem
             {
                 File.Delete("simulatedannealing.txt");
             }
+            if (File.Exists("taboosearch.txt"))
+            {
+                File.Delete("taboosearch.txt");
+            }
         }
 
         public void savePointsToFile(string path, int iteration)

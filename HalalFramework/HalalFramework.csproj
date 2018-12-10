@@ -53,6 +53,7 @@
     <Compile Include="Solver\ImageSegmentationCluster.cs" />
     <Compile Include="Solver\SBPHillClimbing.cs" />
     <Compile Include="Solver\SimulatedAnnealingSmallestBoundaryPolygon.cs" />
+    <Compile Include="Solver\TaboSearchSmallestBoundaryPolygon.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -10,7 +10,7 @@ namespace HalalFramework.Solver
     class SimulatedAnnealingSmallestBoundaryPolygon
     {
         SmallestBoundaryPoligonProblem problem;
-        int actIteration = 0, maxIteration = 1000;
+        int actIteration = 0;
         double T;
         readonly double Kb = 1.380649 * Math.Pow(10, -23);
 
