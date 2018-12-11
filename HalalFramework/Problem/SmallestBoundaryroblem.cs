@@ -11,15 +11,29 @@ namespace HalalFramework.Problem
     {
         List<Point> points = new List<Point>();
         List<Point> solution = new List<Point>();
+        private static SmallestBoundaryPoligonProblem itself = null;
         public static Random RAND = new Random();
 
         public List<Point> Points { get => points; set => points = value; }
         public List<Point> Solution { get => solution; set => solution = value; }
 
-        public SmallestBoundaryPoligonProblem(string filename)
+        private SmallestBoundaryPoligonProblem(string filename)
         {
             loadPointsFromFile(filename);
             DeleteExistingSolution();
+        }
+
+        public static SmallestBoundaryPoligonProblem getInstance(string filename)
+        {
+            if (itself != null)
+            {
+                itself.Solution.Clear();
+            }
+            else
+            {
+                itself = new SmallestBoundaryPoligonProblem(filename);
+            }
+            return itself;
         }
 
         void loadPointsFromFile(string fileName)
@@ -36,9 +50,9 @@ namespace HalalFramework.Problem
 
         void DeleteExistingSolution()
         {
-            if (File.Exists("hcsto.txt"))
+            if (File.Exists("hillclimbing.txt"))
             {
-                File.Delete("hcsto.txt");
+                File.Delete("hillclimbing.txt");
             }
             if (File.Exists("simulatedannealing.txt"))
             {
@@ -50,10 +64,13 @@ namespace HalalFramework.Problem
             }
         }
 
-        public void savePointsToFile(string path, int iteration)
+        public void savePointsToFile(string path, int iteration, bool clear)
         {
             StreamWriter sw = new StreamWriter(path, true, Encoding.UTF8);
-            sw.WriteLine("Clear");
+            if (clear)
+            {
+                sw.WriteLine("Clear");
+            }
             sw.WriteLine("Iteration\t" + iteration);
 
             foreach (Point pnt in Points)

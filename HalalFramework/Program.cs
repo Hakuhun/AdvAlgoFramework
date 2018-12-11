@@ -14,9 +14,13 @@ namespace HalalFramework
         {
             //ImageSegmentationCluster isc = new ImageSegmentationCluster("slide_sample.bmp",3);
 
-            //HillClimbingStohacticSmallestBundaryPolygon sphbhc = new HillClimbingStohacticSmallestBundaryPolygon("Points.txt");
+            SmallestBoundaryPoligonProblem problem = SmallestBoundaryPoligonProblem.getInstance("Points.txt");
 
-            SimulatedAnnealingSmallestBoundaryPolygon simu = new SimulatedAnnealingSmallestBoundaryPolygon("Points.txt");
+            //HillClimbingStohacticSmallestBundaryPolygon sphbhc = new HillClimbingStohacticSmallestBundaryPolygon(problem);
+
+            //SimulatedAnnealingSmallestBoundaryPolygon simu = new SimulatedAnnealingSmallestBoundaryPolygon(problem);
+
+            TaboSearchSmallestBoundaryPolygon tabu = new TaboSearchSmallestBoundaryPolygon(problem);
         }
     }
 }

@@ -14,15 +14,16 @@ namespace HalalFramework.Solver
         double T;
         readonly double Kb = 1.380649 * Math.Pow(10, -23);
 
-        public SimulatedAnnealingSmallestBoundaryPolygon(string filename)
+        public SimulatedAnnealingSmallestBoundaryPolygon(SmallestBoundaryPoligonProblem problem)
         {
+            this.problem = problem;
             T = 10000;
-            problem = new SmallestBoundaryPoligonProblem(filename);
             Calc();
         }
 
         void Calc()
         {
+            Console.WriteLine("Smallest Boundary Polygon problem solving with Simulated Annealing");
             //p <-rnd- S
             problem.Solution = problem.GenerateRandomPoints(5);
             //Popt <- p
@@ -56,8 +57,8 @@ namespace HalalFramework.Solver
                     }
                 }
                 actIteration++;
-                Console.WriteLine(T + Environment.NewLine);
-                problem.savePointsToFile("simulatedannealing.txt", actIteration);
+                //Console.WriteLine(T + Environment.NewLine);
+                problem.savePointsToFile("simulatedannealing.txt", actIteration, true);
             }
 
         }

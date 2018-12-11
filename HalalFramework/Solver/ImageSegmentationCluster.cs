@@ -24,6 +24,7 @@ namespace HalalFramework.Solver
         public void KMeans(int NumberOfClusters, byte[] dataset)
         {
             //N mennyiségű klaszter létrehozása.
+            Console.WriteLine("Image Segmentation problem solving with clustering algo KMeans");
             this.clusters = InitializeCentroids(problem.RawGrayscale, NumberOfClusters);
             List<Cluster> newClusters = null;
             do

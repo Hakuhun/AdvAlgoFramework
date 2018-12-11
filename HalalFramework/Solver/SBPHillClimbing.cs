@@ -14,14 +14,15 @@ namespace HalalFramework.Solver
         SmallestBoundaryPoligonProblem problem;
         int iteration = 0;
 
-        public HillClimbingStohacticSmallestBundaryPolygon(string filename)
+        public HillClimbingStohacticSmallestBundaryPolygon(SmallestBoundaryPoligonProblem problem)
         {
-            problem = new SmallestBoundaryPoligonProblem(filename);
+            this.problem = problem;
             Calc();
         }
         
         void Calc()
         {
+            Console.WriteLine("Smallest Boundary Polygon problem solving with HillClimbing...");
             //p <- rnd - S 
             problem.Solution = problem.GenerateRandomPoints(5);
 
@@ -43,7 +44,7 @@ namespace HalalFramework.Solver
                     iteration++;
                 }
 
-                problem.savePointsToFile("hcsto.txt", i);
+                problem.savePointsToFile("hillclimbing.txt", i, true);
 
 
                 i++;
