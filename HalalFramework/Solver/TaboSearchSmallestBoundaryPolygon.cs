@@ -16,7 +16,7 @@ namespace HalalFramework.Solver
         public TaboSearchSmallestBoundaryPolygon(SmallestBoundaryPoligonProblem problem)
         {
             this.problem = problem;
-            Calc(15, problem.objective, StopCondition);
+            Calc(2, problem.objective, StopCondition);
         }
 
         void Calc(float ε, Func<List<Point>,  double> f, Func<bool> stopCondtion )
